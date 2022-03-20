@@ -1,6 +1,7 @@
 #!/bin/bash
 
 pid=$(lsof -i:8080 | grep java | awk '{print $2}')
+echo pid is $pid
 
 if [ -z $pid ]
 then
