@@ -48,6 +48,7 @@ jobs:
     - name: 重启程序
       run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} "sh /home/fudongdong/playground/start.sh"
 
+
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 #      env:
