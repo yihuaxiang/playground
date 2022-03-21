@@ -28,7 +28,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: 修改数据库密码
-      run: sed -i.old s/XXXX/${{PASSWORD}}/g src/main/resources/application.properties
+      run: sed -i.old s/XXXX/${{secrets.PASSWORD}}/g src/main/resources/application.properties
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
