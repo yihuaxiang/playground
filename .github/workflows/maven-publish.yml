@@ -27,6 +27,9 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: 修改数据库密码
+      run: sed -i.old s/XXXX/${{PASSWORD}}/g src/main/resources/application.properties
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
