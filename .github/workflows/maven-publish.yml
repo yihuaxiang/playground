@@ -31,7 +31,7 @@ jobs:
       run: sed -i.old s/XXXX/${{secrets.PASSWORD}}/g src/main/resources/application.properties
 
     - name: 配置本地环境
-      run: sudo apt install sshpass && ssh-keygen -R ${{secrets.HOST}} && mkdir -p /tmp/mkstempc
+      run: sudo apt install sshpass && mkdir -p /tmp/mkstempc && ssh-keygen -R ${{secrets.HOST}}
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
