@@ -40,7 +40,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: 上传到服务器
-      run: sshpass -p ${{secrets.SERVERPASSWORD}} scp ${{secrets.USERNAME}}@${{secrets.HOST}}:~/playground/target/ target/website-0.0.1-SNAPSHOT.jar
+      run: sshpass -p ${{secrets.SERVERPASSWORD}} scp ${{secrets.USERNAME}}@${{secrets.HOST}}:~/playground/target/website-0.0.1-SNAPSHOT.jar target/website-0.0.1-SNAPSHOT.jar
 
     - name: 重启程序
       run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} 'bash -s' < echo 'sh ~/playground/start.sh'
