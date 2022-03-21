@@ -30,6 +30,9 @@ jobs:
     - name: 修改数据库密码
       run: sed -i.old s/XXXX/${{secrets.PASSWORD}}/g src/main/resources/application.properties
 
+    - name: test
+      run: cat  ~/.ssh/known_hosts
+
     - name: 配置本地环境
       run: sudo apt install sshpass && mkdir -p /tmp/mkstemp && ssh-keygen -R ${{secrets.HOST}}
 
