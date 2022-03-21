@@ -36,8 +36,8 @@ jobs:
     - name: 配置本地环境
       run: sudo apt install sshpass && mkdir -p /tmp/mkstemp
 
-    - name: 重启程序
-      run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} "sh /home/fudongdong/playground/start.sh"
+#    - name: 重启程序
+#      run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} "sh /home/fudongdong/playground/start.sh"
 
     - name: maven编译
       run: mvn -B package --file pom.xml
@@ -46,7 +46,7 @@ jobs:
       run: sshpass -p ${{secrets.SERVERPASSWORD}} scp target/website-0.0.1-SNAPSHOT.jar ${{secrets.USERNAME}}@${{secrets.HOST}}:~/playground/target/website-0.0.1-SNAPSHOT.jar
 
     - name: 重启程序
-      run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} 'bash -s' < echo 'sh /home/fudongdong/playground/start.sh'
+      run: sshpass -p ${{secrets.SERVERPASSWORD}} ssh ${{secrets.USERNAME}}@${{secrets.HOST}} "sh /home/fudongdong/playground/start.sh"
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
