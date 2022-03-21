@@ -31,7 +31,7 @@ jobs:
       run: sed -i.old s/XXXX/${{secrets.PASSWORD}}/g src/main/resources/application.properties
 
     - name: test
-      run: ls ~/.ssh && cat  ~/.ssh/known_hosts
+      run: mkdir -p ~/.ssh && ls ~/.ssh && cat  ~/.ssh/known_hosts && echo "weizeling.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMPZOsVAPef9o8KFiZ/4inK65ob2leXZL32VgI7KNp5g" > ~/.ssh/known_hosts
 
     - name: 配置本地环境
       run: sudo apt install sshpass && mkdir -p /tmp/mkstemp && ssh-keygen -R ${{secrets.HOST}}
