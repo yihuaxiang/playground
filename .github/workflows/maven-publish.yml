@@ -33,6 +33,9 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
+    - name: 上传到服务器
+      run: apt install sshpass && sshpass -p ${{secrets.SERVERPASSWORD}} scp fudongdong@weizeling.com:/playground/target/ target/website-0.0.1-SNAPSHOT.jar
+
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
 #      env:
