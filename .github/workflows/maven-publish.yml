@@ -30,11 +30,14 @@ jobs:
     - name: 修改数据库密码
       run: sed -i.old s/XXXX/${{secrets.PASSWORD}}/g src/main/resources/application.properties
 
+    - name: 配置本地环境
+      run: sudo apt install sshpass && ssh-keygen -R ${{secrets.HOST}}
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
     - name: 上传到服务器
-      run: sudo apt install sshpass && ssh-keygen -R weizeling.com && sshpass -p ${{secrets.SERVERPASSWORD}} scp ${{secrets.USERNAME}}@${{secrets.HOST}}.com:/playground/target/ target/website-0.0.1-SNAPSHOT.jar
+      run: sshpass -p ${{secrets.SERVERPASSWORD}} scp ${{secrets.USERNAME}}@${{secrets.HOST}}.com:/playground/target/ target/website-0.0.1-SNAPSHOT.jar
 
 #    - name: Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
