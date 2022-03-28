@@ -26,6 +26,33 @@
       .project-list li {
         position: relative;
         cursor: pointer;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 3px #ccc;
+        border-radius: 2px;
+      }
+
+      .project-list li:hover {
+        box-shadow: 1px 1px 3px #ccc;
+      }
+
+      .infos {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 30px;
+        line-height: 30px;
+        padding-left: 20px;
+        background: #cccccc70;
+      }
+
+      .infos h3 {
+        display: inline;
+      }
+
+      .more-infos {
+        display: none;
       }
 
       .project-list li a:after {
@@ -82,6 +109,16 @@
         <li>
             <a href="${project.url}">
                 <img src="${project.preview}"/>
+                <div class="infos">
+                    <h3 class="name">
+                        ${project.name}
+                    </h3>
+                </div>
+                <div class="more-infos">
+                    <p class="desc">
+                        ${project.description}
+                    </p>
+                </div>
             </a>
         </li>
     </c:forEach>
