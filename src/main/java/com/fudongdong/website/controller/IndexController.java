@@ -1,6 +1,7 @@
 package com.fudongdong.website.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -13,5 +14,10 @@ public class IndexController {
     @GetMapping("/")
     public String index() {
         return "forward:/index.html";
+    }
+
+    @GetMapping("/test")
+    public String test(Model model) {
+        return "index";
     }
 }
