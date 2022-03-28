@@ -51,8 +51,23 @@
         display: inline;
       }
 
+      li:hover .more-infos{
+        display: block;
+      }
+
       .more-infos {
         display: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        text-align: center;
+        left: 50%;
+        z-index: 9;
+        transform: translateX(-50%) translateY(-50%);
+      }
+
+      .more-infos p {
+        margin: 0 auto;
       }
 
       .project-list li a:after {
@@ -70,7 +85,7 @@
       }
 
       .project-list li a:hover:after {
-        content: '点击访问';
+        content: '';
         position: absolute;
         left: 0px;
         right: 0px;
