@@ -1,5 +1,9 @@
 package com.fudongdong.website.controller;
 
+import java.util.List;
+
+import com.fudongdong.website.entity.PgProject;
+import com.fudongdong.website.service.IPgProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class IndexController {
+    private final IPgProjectService pgProjectService;
+
+    public IndexController(IPgProjectService pgProjectService) {this.pgProjectService = pgProjectService;}
 
     @GetMapping("/")
-    public String index() {
-        return "forward:/index.html";
-    }
-
-    @GetMapping("/test")
-    public String test(Model model) {
+    public String index(Model model) {
+        List<PgProject> list = pgProjectService.list();
+        model.addAttribute("list", list);
         return "index";
     }
 }
