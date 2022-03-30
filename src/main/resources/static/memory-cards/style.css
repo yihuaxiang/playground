@@ -123,7 +123,7 @@ h1 button {
 
 .inner-card-front::after,
 .inner-card-back::after {
-  content: '\f021  Flip';
+  content: '\f021  翻转';
   font-family: 'Font Awesome 5 Free', Lato, sans-serif;
   position: absolute;
   top: 10px;
