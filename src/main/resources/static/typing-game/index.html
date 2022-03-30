@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Speed Typer</title>
+    <title>打字游戏</title>
   </head>
   <body>
     <button id="settings-btn" class="settings-btn">
@@ -21,19 +21,19 @@
     <div id="settings" class="settings">
       <form id="settings-form">
         <div>
-          <label for="difficulty">Difficulty</label>
+          <label for="difficulty">难度等级</label>
           <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
+            <option value="easy">入门级</option>
+            <option value="medium">普通级</option>
+            <option value="hard">高难度</option>
           </select>
         </div>
       </form>
     </div>
 
     <div class="container">
-      <h2>👩‍💻 Speed Typer 👨‍💻</h2>
-      <small>Type the following:</small>
+      <h2>👩‍💻 打字游戏👨‍💻</h2>
+      <small>请输入以下单词:</small>
 
       <h1 id="word"></h1>
 
@@ -41,7 +41,7 @@
         type="text"
         id="text"
         autocomplete="off"
-        placeholder="Type the word here..."
+        placeholder="在此输入..."
         autofocus
       />
 
