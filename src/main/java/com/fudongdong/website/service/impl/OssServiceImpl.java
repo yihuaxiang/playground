@@ -43,8 +43,8 @@ public class OssServiceImpl implements IOssService {
     public String uploadImage(InputStream imgInputStream, String suffix) {
         log.info("begin uploadImage");
         DateTime today = new DateTime();
-        String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-DD"),
-            UUID.randomUUID(), suffix);
+        String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-dd"),
+            UUID.randomUUID().toString().replaceAll("-", ""), suffix);
         PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
             imgInputStream);
         log.info("uploadImage result is {}", putObjectResult);
