@@ -41,6 +41,7 @@ public class OssServiceImpl implements IOssService {
 
     @Override
     public String uploadImage(InputStream imgInputStream, String suffix) {
+        log.info("begin uploadImage");
         DateTime today = new DateTime();
         String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-DD"),
             UUID.randomUUID(), suffix);
