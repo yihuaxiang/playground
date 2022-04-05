@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fudongdong.website.service.IBlobPvService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class BlogPvController {
         @RequestParam(value ="url") String url,
         HttpServletRequest request
     ) throws JsonProcessingException {
+        url = StringUtils.substringBefore(url, "?");
         ObjectMapper mapper = new ObjectMapper();
         Enumeration<String> headerNames = request.getHeaderNames();
         ObjectNode headers = mapper.createObjectNode();
@@ -59,6 +61,7 @@ public class BlogPvController {
     public int accumulation(
         @RequestParam(value = "url") String url
     ) {
+        url = StringUtils.substringBefore(url, "?");
         return blogPvService.accumulation(url);
     }
 }
