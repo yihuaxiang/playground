@@ -3,6 +3,7 @@ package com.fudongdong.website.service.impl;
 import com.fudongdong.website.entity.BlogPv;
 import com.fudongdong.website.mapper.BlogPvMapper;
 import com.fudongdong.website.service.IBlobPvService;
+import com.fudongdong.website.wrapper.BlogPvQuery;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,12 @@ public class BlobPvServiceImpl implements IBlobPvService {
         pv.setUrl(url);
         pv.setHeaders(headers);
         blogPvMapper.saveOrUpdate(pv);
+    }
+
+    @Override
+    public int accumulation(String url) {
+        BlogPvQuery query = new BlogPvQuery();
+        query.where.url().eq(url);
+        return blogPvMapper.count(query);
     }
 }

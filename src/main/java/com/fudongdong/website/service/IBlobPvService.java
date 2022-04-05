@@ -11,4 +11,11 @@ public interface IBlobPvService {
      * @param headers
      */
     void save(String url, String headers);
+
+    /**
+     * 指定 url 的访问量
+     * @param url
+     * @return
+     */
+    int accumulation(String url);
 }

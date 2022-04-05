@@ -49,4 +49,16 @@ public class BlogPvController {
 
         return "success";
     }
+
+    /**
+     * 指定 url 的累计访问量
+     * @param url
+     * @return
+     */
+    @GetMapping("/accumulation")
+    public int accumulation(
+        @RequestParam(value = "url") String url
+    ) {
+        return blogPvService.accumulation(url);
+    }
 }
