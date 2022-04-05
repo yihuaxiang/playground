@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.fudongdong.website.service.IOssService;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author dongdong.fdd
  * @date 2022/4/5 17:07
  */
+@Slf4j
 @RequestMapping("/img")
 @RestController
 @CrossOrigin(origins = {"https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com", "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
@@ -35,7 +37,8 @@ public class ImgController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String create(@RequestPart MultipartFile file) throws IOException {
+    public String upload(@RequestPart MultipartFile file) throws IOException {
+        log.info("get upload request");
         String contentType = file.getContentType();
         if (Objects.nonNull(contentType)) {
             if (contentTypeSet.contains(contentType.toLowerCase())) {
