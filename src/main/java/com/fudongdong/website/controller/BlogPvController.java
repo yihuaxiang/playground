@@ -37,7 +37,7 @@ public class BlogPvController {
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String next = headerNames.nextElement();
-                headers.put(next, request.getHeader(headerNames.nextElement()));
+                headers.put(next, request.getHeader(next));
             }
         }
 
