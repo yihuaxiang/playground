@@ -1,5 +1,7 @@
 package com.fudongdong.website.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,16 +11,16 @@ import com.fudongdong.website.utils.RequestUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author dongdong.fdd
  * @date 2022/4/9 15:41
  */
-@RestController
+@Controller
 @RequestMapping("/lbs")
 @Slf4j
 public class LbsController {
@@ -51,11 +53,12 @@ public class LbsController {
      * @param request
      * @return
      */
+    @RequestMapping("/showIp")
     public String showIp(HttpServletRequest request, Model model) {
         String ip = RequestUtils.getRemoteId(request);
         String city = lbsService.ip2city(ip);
-        model.addAttribute("ip", ip);
-        model.addAttribute("city", city);
+        model.addAttribute("ip", Optional.ofNullable(ip).orElse("-"));
+        model.addAttribute("city", Optional.ofNullable(city).orElse("未知城市"));
 
         return "showIp";
     }
