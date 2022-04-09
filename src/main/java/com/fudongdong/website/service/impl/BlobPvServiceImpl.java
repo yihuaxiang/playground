@@ -7,6 +7,7 @@ import com.fudongdong.website.service.ILbsService;
 import com.fudongdong.website.wrapper.BlogPvQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Primary;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,6 +25,7 @@ public class BlobPvServiceImpl implements IBlobPvService {
     }
 
     @Override
+    @Async
     public void save(String url, String headers, String ip) {
         BlogPv pv = new BlogPv();
         pv.setUrl(url);
