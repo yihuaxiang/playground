@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Primary()
 public class LbsServiceImpl implements ILbsService {
-    @Value("lbs.webapi.key")
+    @Value("${lbs.webapi.key}")
     private String key;
 
     /**
