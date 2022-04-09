@@ -26,7 +26,7 @@
              style="display: inline-block; margin-bottom: 7px; border: 2px solid #2095f2; border-radius: 3px;">
             <form name="ipForm">
                 <input class="input-text" id="ip" type="text" name="ip" size="16" placeholder="请输入iP地址"
-                       style="width: 540px; height: 20px; padding: 10px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
+                       style="min-width: 200px; height: 20px; padding: 10px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
                 <input class="input-button" type="submit" value="查询"
                        style="width: 100px; height: 40px; line-height: 40px; vertical-align: middle; font-family: Tahoma, Arial, Helvetica, 寰蒋闆呴粦; font-size: 16px; color: rgb(255, 255, 255); cursor: pointer; appearance: none; border-width: medium; border-style: none; border-color: initial; border-image: initial; background: rgb(32, 149, 242); outline: none; border-radius: 0px;">
             </form>
