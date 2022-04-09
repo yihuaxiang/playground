@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -29,16 +30,17 @@ public class LbsController {
     private ObjectMapper mapper = new ObjectMapper();
 
     /**
-     * 返回调用方的 ip 和所在城市，返回 JSON 数据
+     * 查询 ip 和所在城市，返回 JSON 数据，如果有传 ip，则使用参数中的ip，否则使用调用方的ip
      *
-     * @param request
+     * @param request 当前请求对象
+     * @param ip      查询的目标 ip
      * @return
      */
     @SneakyThrows
     @RequestMapping("getIp")
     @ResponseBody
-    public ObjectNode ip(HttpServletRequest request) {
-        String ip = RequestUtils.getRemoteId(request);
+    public ObjectNode ip(HttpServletRequest request, @RequestParam(value = "ip", required = false) String ip) {
+        ip = Optional.ofNullable(ip).orElse(RequestUtils.getRemoteId(request));
         String city = lbsService.ip2city(ip);
         ObjectNode objectNode = mapper.createObjectNode();
         objectNode.put("ip", ip);
