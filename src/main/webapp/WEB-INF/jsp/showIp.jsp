@@ -32,8 +32,18 @@
         <div class="search"
              style="display: inline-block; margin-bottom: 7px; border: 2px solid #2095f2; border-radius: 3px;">
             <form name="ipForm">
-                <input class="input-text" id="ip" type="text" name="ip" size="16" placeholder="请输入iP地址"
+                <input list="ips" data-sublist="" class="input-text" id="ip" type="text" name="ip" size="16" placeholder="请输入iP地址"
                        style="min-width: 200px; height: 20px; padding: 10px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
+                <datalist id="ips">
+                    <option value="123.123.42.137">
+                    <option value="111.13.149.108">
+                    <option value="123.151.137.18">
+                    <option value="203.205.251.178">
+                    <option value="14.197.245.125">
+                    <option value="1.2.127.255">
+                    <option value="14.197.210.114">
+                    <option value="36.96.247.255">
+                </datalist>
                 <input class="input-button" type="submit" value="查询"
                        style="width: 100px; height: 40px; line-height: 40px; vertical-align: middle; font-family: Tahoma, Arial, Helvetica, 寰蒋闆呴粦; font-size: 16px; color: rgb(255, 255, 255); cursor: pointer; appearance: none; border-width: medium; border-style: none; border-color: initial; border-image: initial; background: rgb(32, 149, 242); outline: none; border-radius: 0px;">
             </form>
