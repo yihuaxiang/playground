@@ -136,8 +136,6 @@
     </c:forEach>
 </ul>
 <script type="module" src="./lulu/all.js"></script>
-<script type="text/javascript">
-  fetch(`https://playground.fudongdong.com/blog/pv?url=\${encodeURIComponent(location.pathname)}`);
-</script>
+<%@include file="common/pvLog.jsp"%>
 </body>
 </html>
