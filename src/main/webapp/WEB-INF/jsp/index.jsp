@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>敖武的项目游乐园</title>
-    <%@ include file="common/meta.jsp "%>
+    <%@include file="./common/meta.jsp" %>
     <link rel="stylesheet" href="./lulu/ui.css">
     <style>
       .title {
