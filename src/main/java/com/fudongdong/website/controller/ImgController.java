@@ -26,14 +26,16 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequestMapping("/img")
 @RestController
-@CrossOrigin(origins = {"https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com", "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
+@CrossOrigin(origins = {"https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com",
+    "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
 public class ImgController {
     private final IOssService ossService;
 
     public ImgController(IOssService ossService) {this.ossService = ossService;}
 
     private final Set<String> contentTypeSet = new HashSet<>(
-        Lists.newArrayList("image/svg+xml", "image/png", "image/jpeg", "image/gif", "video/mp4", "video/mov", "video/avi", "video/3gp", "video/rm", "video/flv"));
+        Lists.newArrayList("image/svg+xml", "image/png", "image/jpeg", "image/gif", "video/mp4", "video/mov",
+            "video/avi", "video/3gp", "video/rm", "video/flv"));
 
     @PostMapping("/upload")
     @ResponseBody
@@ -42,7 +44,8 @@ public class ImgController {
         String contentType = file.getContentType();
         if (Objects.nonNull(contentType)) {
             if (contentTypeSet.contains(contentType.toLowerCase())) {
-                return ossService.uploadImage(file.getInputStream(), StringUtils.substringAfter(contentType, "/"));
+                String suffix = StringUtils.substringBefore(StringUtils.substringAfter(contentType, "/"), "+");
+                return ossService.uploadImage(file.getInputStream(), suffix);
             }
         }
         return "failed";
