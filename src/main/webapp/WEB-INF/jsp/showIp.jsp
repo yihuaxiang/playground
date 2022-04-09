@@ -19,7 +19,7 @@
             <img src="https://fudongdong-statics.oss-cn-beijing.aliyuncs.com/autoupload/2022-04-09/11c7f5b2af10433eb33081aa55217ef7.svg"
                  width="35" alt="iP查询">
         </h1>
-        <p style="font-size: 16px; color: rgb(105, 105, 105);text-align: center;">您的iP地址是：[${ip}] 来自：${city}</p>
+        <p style="font-size: 16px; color: rgb(105, 105, 105);text-align: center;">您${type}的iP地址是：[${ip}] 来自：${city}</p>
     </div>
     <div class="bd" style="margin-bottom: 15px;text-align: center;">
         <div class="search"
@@ -27,12 +27,11 @@
             <form name="ipForm">
                 <input class="input-text" id="ip" type="text" name="ip" size="16" placeholder="请输入iP地址"
                        style="width: 540px; height: 20px; padding: 10px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
-                <input type="hidden" name="action" value="2">
                 <input class="input-button" type="submit" value="查询"
                        style="width: 100px; height: 40px; line-height: 40px; vertical-align: middle; font-family: Tahoma, Arial, Helvetica, 寰蒋闆呴粦; font-size: 16px; color: rgb(255, 255, 255); cursor: pointer; appearance: none; border-width: medium; border-style: none; border-color: initial; border-image: initial; background: rgb(32, 149, 242); outline: none; border-radius: 0px;">
             </form>
+        </div>
     </div>
-</div>
-<%@include file="common/pvLog.jsp" %>
+    <%@include file="common/pvLog.jsp" %>
 </body>
 </html>

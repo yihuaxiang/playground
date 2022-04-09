@@ -10,6 +10,7 @@ import com.fudongdong.website.service.ILbsService;
 import com.fudongdong.website.utils.RequestUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,9 @@ public class LbsController {
     @RequestMapping("getIp")
     @ResponseBody
     public ObjectNode ip(HttpServletRequest request, @RequestParam(value = "ip", required = false) String ip) {
-        ip = Optional.ofNullable(ip).orElse(RequestUtils.getRemoteId(request));
+        if (StringUtils.isBlank(ip)) {
+            ip = RequestUtils.getRemoteId(request);
+        }
         String city = lbsService.ip2city(ip);
         ObjectNode objectNode = mapper.createObjectNode();
         objectNode.put("ip", ip);
@@ -56,11 +59,17 @@ public class LbsController {
      * @return
      */
     @RequestMapping("/showIp")
-    public String showIp(HttpServletRequest request, Model model) {
-        String ip = RequestUtils.getRemoteId(request);
+    public String showIp(HttpServletRequest request, Model model,
+                         @RequestParam(value = "ip", required = false) String ip) {
+        String type = "查询";
+        if (StringUtils.isBlank(ip)) {
+            ip = RequestUtils.getRemoteId(request);
+            type = "当前";
+        }
         String city = lbsService.ip2city(ip);
         model.addAttribute("ip", Optional.ofNullable(ip).orElse("-"));
         model.addAttribute("city", Optional.ofNullable(city).orElse("未知城市"));
+        model.addAttribute("type", type);
 
         return "showIp";
     }
