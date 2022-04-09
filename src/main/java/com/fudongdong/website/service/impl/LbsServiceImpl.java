@@ -53,6 +53,6 @@ public class LbsServiceImpl implements ILbsService {
     @SneakyThrows
     private HttpResponse doGet(String url) {
         HttpClient client = HttpClientBuilder.create().build();
-        return client.execute(new HttpGet(ipApiUrl));
+        return client.execute(new HttpGet(url));
     }
 }
