@@ -33,7 +33,7 @@ public class ImgController {
     public ImgController(IOssService ossService) {this.ossService = ossService;}
 
     private final Set<String> contentTypeSet = new HashSet<>(
-        Lists.newArrayList("image/png", "image/jpeg", "image/gif", "video/mp4", "video/mov", "video/avi", "video/3gp", "video/rm", "video/flv"));
+        Lists.newArrayList("image/svg+xml", "image/png", "image/jpeg", "image/gif", "video/mp4", "video/mov", "video/avi", "video/3gp", "video/rm", "video/flv"));
 
     @PostMapping("/upload")
     @ResponseBody
