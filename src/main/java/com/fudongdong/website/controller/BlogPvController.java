@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fudongdong.website.service.IBlobPvService;
+import com.fudongdong.website.utils.RequestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +48,8 @@ public class BlogPvController {
 
         String headersString = mapper.writeValueAsString(headers);
 
-        blogPvService.save(url, headersString);
+        String remoteIp = RequestUtils.getRemoteId(request);
+        blogPvService.save(url, headersString, remoteIp);
 
         return "success";
     }

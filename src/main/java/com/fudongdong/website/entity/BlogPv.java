@@ -30,6 +30,16 @@ public class BlogPv extends RichEntity {
     private String headers;
 
     /**
+     * 调用方 ip
+     */
+    private String remoteIp;
+
+    /**
+     * 调用方 IP 所在城市
+     */
+    private String city;
+
+    /**
      * 数据创建日期
      */
     private Date time;
