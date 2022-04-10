@@ -8,10 +8,10 @@ import java.util.Set;
 import com.fudongdong.website.service.IOssService;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,13 +39,13 @@ public class ImgController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestPart MultipartFile file) throws IOException {
+    public String upload(@RequestPart MultipartFile file, @RequestParam("fileName") String fileName)
+        throws IOException {
         log.info("get upload request");
         String contentType = file.getContentType();
         if (Objects.nonNull(contentType)) {
             if (contentTypeSet.contains(contentType.toLowerCase())) {
-                String suffix = StringUtils.substringBefore(StringUtils.substringAfter(contentType, "/"), "+");
-                return ossService.uploadImage(file.getInputStream(), suffix);
+                return ossService.uploadImage(file.getInputStream(), fileName);
             }
         }
         return "failed";

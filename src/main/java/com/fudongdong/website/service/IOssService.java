@@ -10,9 +10,9 @@ public interface IOssService {
     /**
      * 上传照片
      *
-     * @param imgInputStream
-     * @param suffix
-     * @return
+     * @param imgInputStream 上传文件的文件数据流
+     * @param fileName 上传文件的文件名
+     * @return 上传后的 url
      */
-    String uploadImage(InputStream imgInputStream, String suffix);
+    String uploadImage(InputStream imgInputStream, String fileName);
 }
