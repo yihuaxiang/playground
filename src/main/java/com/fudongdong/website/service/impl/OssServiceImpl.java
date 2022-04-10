@@ -74,6 +74,9 @@ public class OssServiceImpl implements IOssService {
 
     @Override
     public List<OssUploadRecord> history() {
-        return ossUploadRecordMapper.listEntity(new OssUploadRecordQuery());
+        OssUploadRecordQuery query = new OssUploadRecordQuery();
+        query.orderBy.time().desc();
+        query.limit(1000);
+        return ossUploadRecordMapper.listEntity(query);
     }
 }
