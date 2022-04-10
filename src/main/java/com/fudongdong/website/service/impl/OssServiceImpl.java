@@ -51,7 +51,7 @@ public class OssServiceImpl implements IOssService {
     }
 
     @Override
-    public String uploadImage(InputStream imgInputStream, String fileName) {
+    public String uploadImage(InputStream imgInputStream, String fileName, String uid) {
         log.info("begin uploadImage");
         DateTime today = new DateTime();
         String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-dd"),
@@ -63,6 +63,7 @@ public class OssServiceImpl implements IOssService {
 
         OssUploadRecord record = new OssUploadRecord();
         record.setFileName(fileName);
+        record.setUid(uid);
         record.setTime(new Date());
         record.setUrl(url);
         log.info("save to db {},{}", url, record);
@@ -73,10 +74,12 @@ public class OssServiceImpl implements IOssService {
     }
 
     @Override
-    public List<OssUploadRecord> history() {
+    public List<OssUploadRecord> history(String uid) {
         OssUploadRecordQuery query = new OssUploadRecordQuery();
+        query.where.uid().eq(uid);
         query.orderBy.time().desc();
         query.limit(100);
+
         return ossUploadRecordMapper.listEntity(query);
     }
 }

@@ -15,14 +15,16 @@ public interface IOssService {
      *
      * @param imgInputStream 上传文件的文件数据流
      * @param fileName       上传文件的文件名
+     * @param uid            用户唯一标志，客户端产生
      * @return 上传后的 url
      */
-    String uploadImage(InputStream imgInputStream, String fileName);
+    String uploadImage(InputStream imgInputStream, String fileName, String uid);
 
     /**
      * 上传历史
      *
+     * @param uid 用户唯一标志
      * @return list
      */
-    List<OssUploadRecord> history();
+    List<OssUploadRecord> history(String uid);
 }

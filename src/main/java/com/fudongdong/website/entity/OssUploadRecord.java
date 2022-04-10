@@ -32,4 +32,9 @@ public class OssUploadRecord extends RichEntity {
      * 上传后的 url
      */
     private String url;
+
+    /**
+     * 用户唯一标志
+     */
+    private String uid;
 }

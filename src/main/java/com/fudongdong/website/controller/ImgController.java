@@ -42,13 +42,13 @@ public class ImgController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestPart MultipartFile file, @RequestParam("fileName") String fileName)
+    public String upload(@RequestPart MultipartFile file, @RequestParam("fileName") String fileName, @RequestParam("uid") String uid)
         throws IOException {
         log.info("get upload request");
         String contentType = file.getContentType();
         if (Objects.nonNull(contentType)) {
             if (contentTypeSet.contains(contentType.toLowerCase())) {
-                return ossService.uploadImage(file.getInputStream(), fileName);
+                return ossService.uploadImage(file.getInputStream(), fileName, uid);
             }
         }
         return "failed";
@@ -57,11 +57,14 @@ public class ImgController {
     /**
      * 照片上传历史
      *
+     * @param uid 用户唯一标志，客户端产生
      * @return
      */
     @GetMapping("/history")
     @ResponseBody
-    public List<OssUploadRecord> history() {
-        return ossService.history();
+    public List<OssUploadRecord> history(
+        @RequestParam("uid") String uid
+    ) {
+        return ossService.history(uid);
     }
 }
