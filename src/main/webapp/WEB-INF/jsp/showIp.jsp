@@ -8,12 +8,43 @@
     <%@include file="./common/meta.jsp" %>
     <meta name="description" content="IP 查询，可视化查询，API 查询接口"/>
     <style>
-        .api-doc-line {
-          font-size: 12px;
-          color: rgb(105, 105, 105);
-          margin: 0;
-          line-height: 18px;
-        }
+      .box {
+        max-width: 500px;
+        margin: 0 auto 20px;
+      }
+
+      .box .hd {
+        position: relative;
+        background: #f5f5f5;
+        height: 40px;
+        border: 1px solid #dbdbdb;
+        border-bottom: none;
+      }
+
+      .box .hd h3 {
+        color: #555;
+        display: block;
+        border-left: 3px solid #2095f2;
+        padding-left: 8px;
+        line-height: 20px;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 10px 0;
+      }
+
+      .box .bd {
+        padding: 10px 20px;
+        border: 1px solid #dbdbdb;
+        line-height: 32px;
+        overflow: hidden;
+      }
+
+      .box .api-doc-line {
+        font-size: 12px;
+        color: rgb(105, 105, 105);
+        margin: 0;
+        line-height: 18px;
+      }
     </style>
 </head>
 <body>
@@ -32,7 +63,8 @@
         <div class="search"
              style="display: inline-block; margin-bottom: 7px; border: 2px solid #2095f2; border-radius: 3px;">
             <form name="ipForm">
-                <input list="ips" data-sublist="" class="input-text" id="ip" type="text" name="ip" size="16" placeholder="请输入iP地址"
+                <input list="ips" data-sublist="" class="input-text" id="ip" type="text" name="ip" size="16"
+                       placeholder="请输入iP地址"
                        style="min-width: 200px; height: 20px; padding: 5px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
                 <datalist id="ips">
                     <option value="123.123.42.137">
@@ -49,11 +81,11 @@
             </form>
         </div>
     </div>
-    <div class="module" style="max-width: 500px; margin: 0 auto;">
-        <div class="hd" style="position: relative; background: #f5f5f5; height: 40px; border: 1px solid #dbdbdb; border-bottom: none;">
-            <h3 style="color: #555;display: block; border-left: 3px solid #2095f2; padding-left: 8px; line-height: 20px; text-decoration: none; font-size: 14px; margin: 10px 0;">接口使用文档</h3>
+    <div class="box">
+        <div class="hd">
+            <h3>接口使用文档</h3>
         </div>
-        <div class="bd" style="padding: 10px 20px; border: 1px solid #dbdbdb; line-height: 32px; overflow: hidden;">
+        <div class="bd">
             <p class="api-doc-line">
                 接口地址：<b>https://playground.fudongdong.com/lbs/getIp</b>
             </p>
@@ -61,7 +93,28 @@
                 接口参数：<b>ip</b>，参数举例：<b>153.37.191.6</b>
             </p>
             <p class="api-doc-line">
-                请求示例：<a href="https://playground.fudongdong.com/lbs/getIp?ip=153.37.191.6">https://playground.fudongdong.com/lbs/getIp?ip=153.37.191.6</a>
+                请求示例：<a href="https://playground.fudongdong.com/lbs/getIp?ip=153.37.191.6" target="_blank">https://playground.fudongdong.com/lbs/getIp?ip=153.37.191.6</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="hd">
+            <h3><b>alfred</b> 插件</h3>
+        </div>
+        <div class="bd">
+            <p class="api-doc-line">
+                插件地址：<a href="https://github.com/yihuaxiang/alfred-workflow-ipip" target="_blank">alfred-workflow-ipip</a>
+            </p>
+        </div>
+    </div>
+    <div class="box">
+        <div class="hd">
+            <h3>文章介绍</h3>
+        </div>
+        <div class="bd">
+            <p class="api-doc-line">
+                文章地址：<a href="https://www.fudongdong.com/misc/ip-query.html" target="_blank">https://www.fudongdong.com/misc/ip-query.html</a>
             </p>
         </div>
     </div>
