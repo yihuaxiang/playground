@@ -2,6 +2,7 @@ package com.fudongdong.website.service.impl;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import com.aliyun.oss.model.PutObjectResult;
 import com.fudongdong.website.entity.OssUploadRecord;
 import com.fudongdong.website.mapper.OssUploadRecordMapper;
 import com.fudongdong.website.service.IOssService;
+import com.fudongdong.website.wrapper.OssUploadRecordQuery;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
@@ -68,5 +70,10 @@ public class OssServiceImpl implements IOssService {
         log.info("save to db successfully");
         return url;
 
+    }
+
+    @Override
+    public List<OssUploadRecord> history() {
+        return ossUploadRecordMapper.listEntity(new OssUploadRecordQuery());
     }
 }

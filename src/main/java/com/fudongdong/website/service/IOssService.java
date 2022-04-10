@@ -1,6 +1,9 @@
 package com.fudongdong.website.service;
 
 import java.io.InputStream;
+import java.util.List;
+
+import com.fudongdong.website.entity.OssUploadRecord;
 
 /**
  * @author dongdong.fdd
@@ -11,8 +14,15 @@ public interface IOssService {
      * 上传照片
      *
      * @param imgInputStream 上传文件的文件数据流
-     * @param fileName 上传文件的文件名
+     * @param fileName       上传文件的文件名
      * @return 上传后的 url
      */
     String uploadImage(InputStream imgInputStream, String fileName);
+
+    /**
+     * 上传历史
+     *
+     * @return list
+     */
+    List<OssUploadRecord> history();
 }
