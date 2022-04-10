@@ -54,8 +54,9 @@
             <span>
             IP归属地查询
             </span>
-            <img src="https://fudongdong-statics.oss-cn-beijing.aliyuncs.com/autoupload/2022-04-09/11c7f5b2af10433eb33081aa55217ef7.svg"
-                 width="35" alt="iP查询">
+            &nbsp;
+            <img src="https://fudongdong-statics.oss-cn-beijing.aliyuncs.com/autoupload/2022-04-10/3f41ac53de2d467ea294740ab6302c90.png"
+                 width="50" alt="iP查询">
         </h1>
         <p style="font-size: 16px; color: rgb(105, 105, 105);text-align: center;">您${type}的iP地址是：[${ip}] 来自：${city}</p>
     </div>
