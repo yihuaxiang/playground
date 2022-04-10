@@ -64,7 +64,7 @@
              style="display: inline-block; margin-bottom: 7px; border: 2px solid #2095f2; border-radius: 3px;">
             <form name="ipForm">
                 <input list="ips" data-sublist="" class="input-text" id="ip" type="text" name="ip" size="16"
-                       placeholder="请输入iP地址"
+                       placeholder="请输入IP地址"
                        style="min-width: 200px; height: 20px; padding: 5px; border: medium none; line-height: 20px; vertical-align: middle; outline: none;">
                 <datalist id="ips">
                     <option value="123.123.42.137">
