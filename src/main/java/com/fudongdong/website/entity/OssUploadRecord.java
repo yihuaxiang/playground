@@ -16,7 +16,7 @@ public class OssUploadRecord extends RichEntity {
     /**
      * ID
      */
-    private int id;
+    private Integer id;
 
     /**
      * 文件名
