@@ -47,7 +47,7 @@
       }
     </style>
 </head>
-<body>
+<body class="content__default">
 <div class="search">
     <div class="hd">
         <h1 style="display: flex;align-items: center;justify-content: center;color: rgb(60, 60, 60)">

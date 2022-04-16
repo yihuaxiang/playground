@@ -109,7 +109,7 @@
       }
     </style>
 </head>
-<body>
+<body class="content__default">
 <h2 class="title">
     敖武的项目游乐园
     <a href="https://github.com/yihuaxiang/playground">
