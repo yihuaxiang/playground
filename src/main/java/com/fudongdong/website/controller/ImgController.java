@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RequestMapping("/img")
 @RestController
-@CrossOrigin(origins = {"https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com",
+@CrossOrigin(origins = {"https://z.wiki", "https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com",
     "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
 public class ImgController {
     private final IOssService ossService;
