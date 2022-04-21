@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/img")
 @RestController
 @CrossOrigin(origins = {"https://z.wiki", "https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com",
-    "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
+    "https://51shazhu.com", "https://playground.z.wiki", "https://playground.fudongdong.com", "http://localhost:8080/"})
 public class ImgController {
     private final IOssService ossService;
 
