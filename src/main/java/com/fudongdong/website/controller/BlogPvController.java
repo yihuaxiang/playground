@@ -23,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/blog")
-@CrossOrigin(origins = {"https://z.wiki", "https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com", "https://51shazhu.com", "https://playground.fudongdong.com", "http://localhost:8080/"})
+@CrossOrigin(origins = {"https://z.wiki", "https://fudongdong.com", "https://www.fudongdong.com", "https://www.weizeling.com",
+  "https://51shazhu.com", "https://playground.z.wiki", "https://playground.fudongdong.com", "http://localhost:8080/"})
 public class BlogPvController {
     private final IBlobPvService blogPvService;
 
