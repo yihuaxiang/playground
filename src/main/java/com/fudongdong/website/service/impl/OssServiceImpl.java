@@ -1,6 +1,7 @@
 package com.fudongdong.website.service.impl;
 
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -14,7 +15,9 @@ import com.fudongdong.website.entity.OssUploadRecord;
 import com.fudongdong.website.mapper.OssUploadRecordMapper;
 import com.fudongdong.website.service.IOssService;
 import com.fudongdong.website.wrapper.OssUploadRecordQuery;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
@@ -50,6 +53,7 @@ public class OssServiceImpl implements IOssService {
         this.ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
 
+    @SneakyThrows
     @Override
     public String uploadImage(InputStream imgInputStream, String fileName, String uid) {
         log.info("begin uploadImage");
@@ -66,6 +70,11 @@ public class OssServiceImpl implements IOssService {
         record.setUid(uid);
         record.setTime(new Date());
         record.setUrl(url);
+
+        // 生成照片的 base64 编码内容
+        String base64 = String.valueOf(Base64.getEncoder().encode(IOUtils.toByteArray(imgInputStream)));
+        record.setBase64(base64);
+
         log.info("save to db {},{}", url, record);
         ossUploadRecordMapper.save(record);
         log.info("save to db successfully");
