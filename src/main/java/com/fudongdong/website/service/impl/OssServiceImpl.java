@@ -57,9 +57,11 @@ public class OssServiceImpl implements IOssService {
     @Override
     public String uploadImage(InputStream imgInputStream, String fileName, String uid) {
         log.info("begin uploadImage");
+        byte[] imgBytes = IOUtils.toByteArray(imgInputStream);
         DateTime today = new DateTime();
         String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-dd"),
             UUID.randomUUID().toString().replaceAll("-", ""), fileName);
+
         PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
             imgInputStream);
         log.info("uploadImage result is {}", putObjectResult);
@@ -72,7 +74,7 @@ public class OssServiceImpl implements IOssService {
         record.setUrl(url);
 
         // 生成照片的 base64 编码内容
-        String base64 = String.valueOf(Base64.getEncoder().encode(IOUtils.toByteArray(imgInputStream)));
+        String base64 = new String(Base64.getEncoder().encode(imgBytes));
         record.setBase64(base64);
 
         log.info("save to db {},{}", url, record);
