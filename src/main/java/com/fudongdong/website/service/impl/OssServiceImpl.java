@@ -1,10 +1,7 @@
 package com.fudongdong.website.service.impl;
 
 import java.io.InputStream;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 
@@ -76,7 +73,11 @@ public class OssServiceImpl implements IOssService {
 
         // 生成照片的 base64 编码内容
         String base64Content = new String(Base64.getEncoder().encode(imgBytes));
-        String base64 = String.format("data:image/%s;base64,%s", StringUtils.substringAfterLast(fileName, "."), base64Content);
+        String fileSuffix = StringUtils.substringAfterLast(fileName, ".");
+        if (StringUtils.isBlank(fileSuffix)) {
+          fileSuffix = "png";
+        }
+        String base64 = String.format("data:image/%s;base64,%s", fileSuffix, base64Content);
         record.setBase64(base64);
 
         log.info("save to db {},{}", url, record);
