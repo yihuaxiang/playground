@@ -18,7 +18,7 @@ public interface IOssService {
      * @param uid            用户唯一标志，客户端产生
      * @return 上传后的 url
      */
-    String uploadImage(InputStream imgInputStream, String fileName, String uid);
+    OssUploadRecord uploadImage(InputStream imgInputStream, String fileName, String uid);
 
     /**
      * 上传历史

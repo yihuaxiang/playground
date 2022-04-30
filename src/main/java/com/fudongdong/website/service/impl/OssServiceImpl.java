@@ -54,7 +54,7 @@ public class OssServiceImpl implements IOssService {
 
     @SneakyThrows
     @Override
-    public String uploadImage(InputStream imgInputStream, String fileName, String uid) {
+    public OssUploadRecord uploadImage(InputStream imgInputStream, String fileName, String uid) {
         log.info("begin uploadImage");
         byte[] imgBytes = IOUtils.toByteArray(imgInputStream);
         DateTime today = new DateTime();
@@ -82,9 +82,9 @@ public class OssServiceImpl implements IOssService {
         record.setBase64(base64);
 
         log.info("save to db {},{}", url, record);
-        ossUploadRecordMapper.save(record);
+        record = ossUploadRecordMapper.save(record);
         log.info("save to db successfully");
-        return url;
+        return record;
 
     }
 

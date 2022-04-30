@@ -42,7 +42,7 @@ public class ImgController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestPart MultipartFile file, @RequestParam("fileName") String fileName, @RequestParam("uid") String uid)
+    public OssUploadRecord upload(@RequestPart MultipartFile file, @RequestParam("fileName") String fileName, @RequestParam("uid") String uid)
         throws IOException {
         log.info("get upload request");
         String contentType = file.getContentType();
@@ -51,7 +51,7 @@ public class ImgController {
                 return ossService.uploadImage(file.getInputStream(), fileName, uid);
             }
         }
-        return "failed";
+        return null;
     }
 
     /**
