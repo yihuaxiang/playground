@@ -82,7 +82,7 @@ public class OssServiceImpl implements IOssService {
         record.setBase64(base64);
 
         log.info("save to db {},{}", url, record);
-        record = ossUploadRecordMapper.save(record);
+        ossUploadRecordMapper.save(record);
         log.info("save to db successfully");
         return record;
 
