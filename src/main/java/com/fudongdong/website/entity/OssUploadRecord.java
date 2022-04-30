@@ -13,28 +13,33 @@ import lombok.Data;
 @FluentMybatis(table = "oss_upload_record")
 @Data
 public class OssUploadRecord extends RichEntity {
-    /**
-     * ID
-     */
-    private Integer id;
+  /**
+   * ID
+   */
+  private Integer id;
 
-    /**
-     * 文件名
-     */
-    private String fileName;
+  /**
+   * 文件名
+   */
+  private String fileName;
 
-    /**
-     * 上传日期
-     */
-    private Date time;
+  /**
+   * 上传日期
+   */
+  private Date time;
 
-    /**
-     * 上传后的 url
-     */
-    private String url;
+  /**
+   * 上传后的 url
+   */
+  private String url;
 
-    /**
-     * 用户唯一标志
-     */
-    private String uid;
+  /**
+   * 用户唯一标志
+   */
+  private String uid;
+
+  /**
+   * 照片的 base64 编码
+   */
+  private String base64;
 }
