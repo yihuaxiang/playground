@@ -1,5 +1,6 @@
 package com.fudongdong.website.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.*;
 
@@ -61,7 +62,7 @@ public class OssServiceImpl implements IOssService {
             UUID.randomUUID().toString().replaceAll("-", ""), fileName);
 
         PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
-            imgInputStream);
+            new ByteArrayInputStream(imgBytes));
         log.info("uploadImage result is {}", putObjectResult);
         String url = String.format("https://%s.%s/%s", bucketName, endpoint, objectKey);
 
