@@ -18,6 +18,7 @@ import com.fudongdong.website.wrapper.OssUploadRecordQuery;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
@@ -74,7 +75,8 @@ public class OssServiceImpl implements IOssService {
         record.setUrl(url);
 
         // 生成照片的 base64 编码内容
-        String base64 = new String(Base64.getEncoder().encode(imgBytes));
+        String base64Content = new String(Base64.getEncoder().encode(imgBytes));
+        String base64 = String.format("data:image/%s;base64,%s", StringUtils.substringAfterLast(fileName, "."), base64Content);
         record.setBase64(base64);
 
         log.info("save to db {},{}", url, record);
