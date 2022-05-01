@@ -70,6 +70,18 @@ function addWordToDOM() {
   word.innerHTML = randomWord;
 }
 
+function modifyRandomWordStyle(insertedText) {
+  console.info('modifyRandomWordStyle', randomWord, insertedText)
+  word.innerHTML = randomWord.split('').map((char,index) => {
+    const insertedChar = insertedText.charAt(index);
+    let color = 'white';
+    if(insertedChar) {
+      color = insertedChar == char ? '#00cb00': 'red';
+    }
+    return `<span style="color: ${color};">${char}</span>`
+  }).join('');
+}
+
 // Update score
 function updateScore() {
   score++;
@@ -91,9 +103,9 @@ function updateTime() {
 // Game over, show end screen
 function gameOver() {
   endgameEl.innerHTML = `
-    <h1>Time ran out</h1>
-    <p>Your final score is ${score}</p>
-    <button onclick="location.reload()">Reload</button>
+    <h1>游戏结束</h1>
+    <p>您的最终得分为：${score}</p>
+    <button onclick="location.reload()">重新开始</button>
   `;
 
   endgameEl.style.display = 'flex';
@@ -106,6 +118,7 @@ addWordToDOM();
 // Typing
 text.addEventListener('input', e => {
   const insertedText = e.target.value;
+  modifyRandomWordStyle(insertedText);
 
   if (insertedText === randomWord) {
     addWordToDOM();
