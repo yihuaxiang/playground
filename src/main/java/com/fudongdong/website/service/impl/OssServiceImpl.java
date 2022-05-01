@@ -93,7 +93,7 @@ public class OssServiceImpl implements IOssService {
         OssUploadRecordQuery query = new OssUploadRecordQuery();
         query.where.uid().eq(uid);
         query.orderBy.time().desc();
-        query.limit(100);
+        query.limit(10);
 
         return ossUploadRecordMapper.listEntity(query);
     }
