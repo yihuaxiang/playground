@@ -88,7 +88,17 @@ public class OssServiceImpl implements IOssService {
 
     }
 
-    @Override
+  @Override
+  public String uploadBase64(String base64Image) {
+    String base64Content = StringUtils.substringAfter(base64Image, ",");
+    String suffix = StringUtils.substringBetween(base64Image, "/", ";");
+    byte[] bytes = Base64.getDecoder().decode(base64Content);
+    String objectKey = String.format("autoupload/%s/%s.%s", new DateTime().toString("YYYY-MM-dd"), UUID.randomUUID(), suffix);
+    this.ossClient.putObject(bucketName, objectKey, new ByteArrayInputStream(bytes));
+    return String.format("https://%s.%s/%s", bucketName, endpoint, objectKey);
+  }
+
+  @Override
     public List<OssUploadRecord> history(String uid) {
         OssUploadRecordQuery query = new OssUploadRecordQuery();
         query.where.uid().eq(uid);
