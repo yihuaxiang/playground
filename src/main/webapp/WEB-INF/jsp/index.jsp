@@ -34,17 +34,16 @@
       }
 
       .infos {
-        position: absolute;
         bottom: 0px;
         left: 0px;
         right: 0px;
         height: 30px;
         line-height: 30px;
         padding-left: 20px;
-        background: #cccccc70;
       }
 
       .infos h3 {
+        font-size: 15px;
         display: inline;
       }
 
@@ -99,22 +98,49 @@
       }
 
       .project-list li a img {
-        width: 316px;
-        height: 213px;
+        width: 266px;
+        height: 173px;
         transition: all 0.3s ease;
       }
 
       .project-list li a img:hover {
         box-shadow: 2px 2px 4px #ccc;
       }
+    .title {
+      margin: 0px;
+      padding-left: 20px;
+      display: flex;
+      padding-right: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      color: black;
+          height: 39px;
+          background-color: #fafafa;
+          border-bottom: 1px solid #e9e9e9;
+          line-height: 39px;
+    }
+
+    .title a.github {
+        flex-grow: 1;
+        text-align: left;
+        padding-left: 5px;
+    }
+    html,body {
+      margin: 0;
+    }
+     a {
+     color: #0275d8;
+         text-decoration: none;
+     }
     </style>
 </head>
 <body class="content__default">
 <h2 class="title">
     敖武的项目游乐园
-    <a href="https://github.com/yihuaxiang/playground">
-        <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/yihuaxiang/playground?style=social">
+    <a class="github" href="https://github.com/yihuaxiang/playground">
+        <img style="vertical-align: middle;" alt="GitHub Repo stars" src="https://img.shields.io/github/stars/yihuaxiang/playground?style=social">
     </a>
+  <a href="https://z.wiki">返回作者的博客</a>
 </h2>
 <ul class="project-list">
     <c:forEach items="${list}" var="project">
