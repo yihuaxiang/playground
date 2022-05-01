@@ -34,6 +34,8 @@ public class OssServiceImpl implements IOssService {
 
     private final OssUploadRecordMapper ossUploadRecordMapper;
 
+    private String host = "z.wiki";
+
     @Value("${oss.endpoint}")
     private String endpoint;
     @Value("${oss.accessKeyId}")
@@ -64,7 +66,7 @@ public class OssServiceImpl implements IOssService {
         PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
             new ByteArrayInputStream(imgBytes));
         log.info("uploadImage result is {}", putObjectResult);
-        String url = String.format("https://%s.%s/%s", bucketName, endpoint, objectKey);
+        String url = String.format("https://%s/%s", bucketName, host, objectKey);
 
         OssUploadRecord record = new OssUploadRecord();
         record.setFileName(fileName);
@@ -95,7 +97,7 @@ public class OssServiceImpl implements IOssService {
     byte[] bytes = Base64.getDecoder().decode(base64Content);
     String objectKey = String.format("autoupload/%s/%s.%s", new DateTime().toString("YYYY-MM-dd"), UUID.randomUUID(), suffix);
     this.ossClient.putObject(bucketName, objectKey, new ByteArrayInputStream(bytes));
-    return String.format("https://%s.%s/%s", bucketName, endpoint, objectKey);
+    return String.format("https://%s/%s", bucketName, host, objectKey);
   }
 
   @Override
