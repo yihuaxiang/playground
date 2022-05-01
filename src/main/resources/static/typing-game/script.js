@@ -80,6 +80,7 @@ function modifyRandomWordStyle(insertedText) {
     }
     return `<span style="color: ${color};">${char}</span>`
   }).join('');
+  document.querySelector('#typingAudio').play();
 }
 
 // Update score
