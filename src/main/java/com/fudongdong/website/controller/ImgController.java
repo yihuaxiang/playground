@@ -56,7 +56,7 @@ public class ImgController {
 
     @PostMapping("/upload/base64")
     public String uploadBase64(@RequestParam("base64") String base64) {
-      return return ossService.uploadBase64(base64);
+      return ossService.uploadBase64(base64);
     }
 
     /**
