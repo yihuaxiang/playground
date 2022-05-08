@@ -35,4 +35,13 @@ public interface IOssService {
    * @return list
    */
   List<OssUploadRecord> history(String uid);
+
+  /**
+   * 获取记录详情
+   *
+   * @param uid 用户唯一标志
+   * @param id  主键 ID
+   * @return OSSUploadRecord
+   */
+  OssUploadRecord detail(String uid, Integer id);
 }

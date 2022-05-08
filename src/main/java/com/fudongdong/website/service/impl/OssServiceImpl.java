@@ -103,10 +103,21 @@ public class OssServiceImpl implements IOssService {
   @Override
     public List<OssUploadRecord> history(String uid) {
         OssUploadRecordQuery query = new OssUploadRecordQuery();
-        query.where.uid().eq(uid);
+        query.select("id", "file_name", "time", "url", "uid").where.uid().eq(uid);
         query.orderBy.time().desc();
         query.limit(10);
 
-        return ossUploadRecordMapper.listEntity(query);
+      List<OssUploadRecord> list = ossUploadRecordMapper.listEntity(query);
+      return list;
     }
+
+  @Override
+  public OssUploadRecord detail(String uid, Integer id) {
+    OssUploadRecordQuery query = new OssUploadRecordQuery();
+    query.where.uid().eq(uid).id().eq(id);
+    query.orderBy.time().desc();
+    query.limit(1);
+
+    return ossUploadRecordMapper.findOne(query);
+  }
 }
