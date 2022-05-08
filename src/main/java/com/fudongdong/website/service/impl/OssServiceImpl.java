@@ -105,7 +105,7 @@ public class OssServiceImpl implements IOssService {
     OssUploadRecordQuery query = new OssUploadRecordQuery();
     query.select("id", "file_name", "time", "url", "uid").where.uid().eq(uid);
     query.orderBy.time().desc();
-    query.limit(10);
+    query.limit(50);
 
     return ossUploadRecordMapper.listEntity(query);
   }
