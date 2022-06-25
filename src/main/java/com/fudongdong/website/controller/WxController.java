@@ -4,7 +4,7 @@ import com.fudongdong.website.service.IWxService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dongdong.fdd
  * @date 2022/6/25 19:48
  */
-@RestController("/wx")
 @Slf4j
-@RequiredArgsConstructor
+@RestController()
+@RequestMapping("/wx")
 @CrossOrigin(origins = {"https://yidaoyilu.z.wiki"})
+@RequiredArgsConstructor
 public class WxController {
+
     private final IWxService wxServiceImpl;
 
-    @GetMapping("/test")
+    @RequestMapping("/test")
     public String test() {
         return this.wxServiceImpl.getAccessToken();
     }
