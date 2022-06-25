@@ -31,10 +31,10 @@ public class WxServiceImpl implements IWxService {
     @Value("${yidaoyilu.wx.appSecret}")
     private String wxAppSecret;
 
-    private ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     // 专用于保存 微信 access_token 等 token 的缓存
-    private LFUCache<Object, Object> cache = CacheUtil.newLFUCache(100);
+    private final LFUCache<Object, Object> cache = CacheUtil.newLFUCache(100);
 
     @SneakyThrows
     @Override

@@ -24,8 +24,8 @@ public class RequestUtils {
     /**
      * 获取远程IP
      *
-     * @param request
-     * @return
+     * @param request HttpServletRequest
+     * @return 调用方 ip
      */
     public static String getRemoteId(HttpServletRequest request) {
         for (String header : IP_HEADER_CANDIDATES) {

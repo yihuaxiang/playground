@@ -58,8 +58,8 @@ public class BlogPvController {
 
     /**
      * 指定 url 的累计访问量
-     * @param url
-     * @return
+     * @param url URL
+     * @return 访问量
      */
     @GetMapping("/accumulation")
     public int accumulation(
