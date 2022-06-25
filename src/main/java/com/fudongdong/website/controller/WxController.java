@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"https://yidaoyilu.z.wiki"})
 public class WxController {
-    private final IWxService wxService;
+    private final IWxService wxServiceImpl;
 
     @GetMapping("/test")
     public String test() {
-        return this.wxService.getAccessToken();
+        return this.wxServiceImpl.getAccessToken();
     }
 }
