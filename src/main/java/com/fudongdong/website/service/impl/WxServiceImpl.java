@@ -1,7 +1,12 @@
 package com.fudongdong.website.service.impl;
 
+import java.util.Objects;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
+
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LFUCache;
+import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fudongdong.website.bo.WxAccessTokenResBo;
@@ -42,7 +47,8 @@ public class WxServiceImpl implements IWxService {
             return preToken;
         } else {
             String getTokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
-            String url = String.format("%s?grant_type=client_credential&appid=%s&secret=%s", getTokenUrl, this.wxAppId, this.wxAppSecret);
+            String url = String.format("%s?grant_type=client_credential&appid=%s&secret=%s", getTokenUrl, this.wxAppId,
+                this.wxAppSecret);
             log.info("getAccessToken, url is {}", url);
             String content = HttpUtil.get(url);
             WxAccessTokenResBo res = mapper.readValue(content, WxAccessTokenResBo.class);
@@ -69,7 +75,8 @@ public class WxServiceImpl implements IWxService {
         if (StringUtils.isNotBlank(prevTicket)) {
             log.info("getJsapiTicket from cache");
         } else {
-            String getTicketUrl = String.format("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi", this.getAccessToken());
+            String getTicketUrl = String.format(
+                "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi", this.getAccessToken());
             String content = HttpUtil.get(getTicketUrl);
             WxJsapiTicketResBo res = mapper.readValue(content, WxJsapiTicketResBo.class);
             if (res.isSuccess()) {
@@ -86,6 +93,14 @@ public class WxServiceImpl implements IWxService {
 
     @Override
     public String getJsSDKSignature(String noncestr, String jsapi_ticket, Long timestamp, String url) {
-        return null;
+        TreeMap<String, String> map = new TreeMap<String, String>();
+        map.put("noncestr", noncestr);
+        map.put("jsapi_ticket", jsapi_ticket);
+        map.put("timestamp", Objects.toString(timestamp, ""));
+        map.put("url", Objects.toString(url, ""));
+        String keyValuePairsString = map.keySet().stream().map(s -> s + "=" + map.get(s)).collect(
+            Collectors.joining("&"));
+        log.info("keyValuePairsString is {}", keyValuePairsString);
+        return DigestUtil.sha1Hex(keyValuePairsString);
     }
 }
