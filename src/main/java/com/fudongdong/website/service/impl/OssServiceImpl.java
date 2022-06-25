@@ -30,71 +30,93 @@ import org.springframework.stereotype.Service;
 @Primary()
 @Slf4j
 public class OssServiceImpl implements IOssService {
-    private OSS ossClient = null;
+  private OSS ossClient = null;
 
-    private final OssUploadRecordMapper ossUploadRecordMapper;
+  private final OssUploadRecordMapper ossUploadRecordMapper;
 
-    @Value("${oss.endpoint}")
-    private String endpoint;
-    @Value("${oss.accessKeyId}")
-    private String accessKeyId;
-    @Value("${oss.accessKeySecret}")
-    private String accessKeySecret;
-    @Value("${oss.bucket}")
-    private String bucketName;
+  private String host = "z.wiki";
 
-    public OssServiceImpl(OssUploadRecordMapper ossUploadRecordMapper) {
-        this.ossUploadRecordMapper = ossUploadRecordMapper;
+  @Value("${oss.endpoint}")
+  private String endpoint;
+  @Value("${oss.accessKeyId}")
+  private String accessKeyId;
+  @Value("${oss.accessKeySecret}")
+  private String accessKeySecret;
+  @Value("${oss.bucket}")
+  private String bucketName;
+
+  public OssServiceImpl(OssUploadRecordMapper ossUploadRecordMapper) {
+    this.ossUploadRecordMapper = ossUploadRecordMapper;
+  }
+
+  @PostConstruct
+  public void init() {
+    this.ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+  }
+
+  @SneakyThrows
+  @Override
+  public OssUploadRecord uploadImage(InputStream imgInputStream, String fileName, String uid) {
+    log.info("begin uploadImage");
+    byte[] imgBytes = IOUtils.toByteArray(imgInputStream);
+    DateTime today = new DateTime();
+    String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-dd"),
+      UUID.randomUUID().toString().replaceAll("-", ""), fileName);
+
+    PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
+      new ByteArrayInputStream(imgBytes));
+    log.info("uploadImage result is {}", putObjectResult);
+    String url = String.format("https://%s/%s", host, objectKey);
+
+    OssUploadRecord record = new OssUploadRecord();
+    record.setFileName(fileName);
+    record.setUid(uid);
+    record.setTime(new Date());
+    record.setUrl(url);
+
+    // 生成照片的 base64 编码内容
+    String base64Content = new String(Base64.getEncoder().encode(imgBytes));
+    String fileSuffix = StringUtils.substringAfterLast(fileName, ".");
+    if (StringUtils.isBlank(fileSuffix)) {
+      fileSuffix = "png";
     }
+    String base64 = String.format("data:image/%s;base64,%s", fileSuffix, base64Content);
+    record.setBase64(base64);
 
-    @PostConstruct
-    public void init() {
-        this.ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-    }
+    log.info("save to db {},{}", url, record);
+    ossUploadRecordMapper.save(record);
+    log.info("save to db successfully");
+    return record;
 
-    @SneakyThrows
-    @Override
-    public OssUploadRecord uploadImage(InputStream imgInputStream, String fileName, String uid) {
-        log.info("begin uploadImage");
-        byte[] imgBytes = IOUtils.toByteArray(imgInputStream);
-        DateTime today = new DateTime();
-        String objectKey = String.format("autoupload/%s/%s.%s", today.toString("YYYY-MM-dd"),
-            UUID.randomUUID().toString().replaceAll("-", ""), fileName);
+  }
 
-        PutObjectResult putObjectResult = this.ossClient.putObject(bucketName, objectKey,
-            new ByteArrayInputStream(imgBytes));
-        log.info("uploadImage result is {}", putObjectResult);
-        String url = String.format("https://%s.%s/%s", bucketName, endpoint, objectKey);
+  @Override
+  public String uploadBase64(String base64Image) {
+    String base64Content = StringUtils.substringAfter(base64Image, ",");
+    String suffix = StringUtils.substringBetween(base64Image, "/", ";");
+    byte[] bytes = Base64.getDecoder().decode(base64Content);
+    String objectKey = String.format("autoupload/%s/%s.%s", new DateTime().toString("YYYY-MM-dd"), UUID.randomUUID(), suffix);
+    this.ossClient.putObject(bucketName, objectKey, new ByteArrayInputStream(bytes));
+    return String.format("https://%s/%s", host, objectKey);
+  }
 
-        OssUploadRecord record = new OssUploadRecord();
-        record.setFileName(fileName);
-        record.setUid(uid);
-        record.setTime(new Date());
-        record.setUrl(url);
+  @Override
+  public List<OssUploadRecord> history(String uid) {
+    OssUploadRecordQuery query = new OssUploadRecordQuery();
+    query.select("id", "file_name", "time", "url", "uid").where.uid().eq(uid);
+    query.orderBy.time().desc();
+    query.limit(50);
 
-        // 生成照片的 base64 编码内容
-        String base64Content = new String(Base64.getEncoder().encode(imgBytes));
-        String fileSuffix = StringUtils.substringAfterLast(fileName, ".");
-        if (StringUtils.isBlank(fileSuffix)) {
-          fileSuffix = "png";
-        }
-        String base64 = String.format("data:image/%s;base64,%s", fileSuffix, base64Content);
-        record.setBase64(base64);
+    return ossUploadRecordMapper.listEntity(query);
+  }
 
-        log.info("save to db {},{}", url, record);
-        ossUploadRecordMapper.save(record);
-        log.info("save to db successfully");
-        return record;
+  @Override
+  public OssUploadRecord detail(String uid, Integer id) {
+    OssUploadRecordQuery query = new OssUploadRecordQuery();
+    query.where.uid().eq(uid).id().eq(id);
+    query.orderBy.time().desc();
+    query.limit(1);
 
-    }
-
-    @Override
-    public List<OssUploadRecord> history(String uid) {
-        OssUploadRecordQuery query = new OssUploadRecordQuery();
-        query.where.uid().eq(uid);
-        query.orderBy.time().desc();
-        query.limit(10);
-
-        return ossUploadRecordMapper.listEntity(query);
-    }
+    return ossUploadRecordMapper.findOne(query);
+  }
 }

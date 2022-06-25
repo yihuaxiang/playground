@@ -18,6 +18,10 @@
       <i class="fas fa-cog"></i>
     </button>
 
+    <audio id="typingAudio" style="display: none;" controls="controls" height="100" width="100">
+      <source src="https://fudongdong-statics.oss-cn-beijing.aliyuncs.com/mp3/sound-of-typing.mp3" type="audio/mp3" />
+    </audio>
+
     <div id="settings" class="settings">
       <form id="settings-form">
         <div>
@@ -45,9 +49,9 @@
         autofocus
       />
 
-      <p class="time-container">Time left: <span id="time">10s</span></p>
+      <p class="time-container">剩余时间: <span id="time">10s</span></p>
 
-      <p class="score-container">Score: <span id="score">0</span></p>
+      <p class="score-container">得分: <span id="score">0</span></p>
 
       <div id="end-game-container" class="end-game-container"></div>
     </div>
