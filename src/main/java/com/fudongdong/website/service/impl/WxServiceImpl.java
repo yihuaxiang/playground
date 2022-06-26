@@ -9,8 +9,10 @@ import cn.hutool.cache.impl.LFUCache;
 import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.http.HttpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fudongdong.website.bo.OAuth2AccessTokenResBo;
 import com.fudongdong.website.bo.WxAccessTokenResBo;
 import com.fudongdong.website.bo.WxJsapiTicketResBo;
+import com.fudongdong.website.bo.WxUserInfo;
 import com.fudongdong.website.service.IWxService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -104,5 +106,19 @@ public class WxServiceImpl implements IWxService {
             Collectors.joining("&"));
         log.info("keyValuePairsString is {}", keyValuePairsString);
         return DigestUtil.sha1Hex(keyValuePairsString);
+    }
+
+    @SneakyThrows
+    @Override
+    public WxUserInfo getWxUserInfo(String code) {
+        String url = String.format("https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code", wxAppId, wxAppSecret, code);
+        String content = HttpUtil.get(url);
+        OAuth2AccessTokenResBo resBo = mapper.readValue(content, OAuth2AccessTokenResBo.class);
+        if (resBo.isSuccess()) {
+            return WxUserInfo.builder().openid(resBo.getOpenid()).build();
+        } else {
+            log.error("failed to getWxUserInfo,response is {}", content);
+            return null;
+        }
     }
 }

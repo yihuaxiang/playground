@@ -1,5 +1,6 @@
 package com.fudongdong.website.controller;
 
+import com.fudongdong.website.bo.WxUserInfo;
 import com.fudongdong.website.service.IWxService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,5 +41,13 @@ public class WxController {
         @RequestParam(value = "url") String url
     ) {
         return this.wxServiceImpl.getJsSDKSignature(noncestr, timestamp, url);
+    }
+
+    @RequestMapping("/wxLogin")
+    public WxUserInfo oauth2Login(
+        @RequestParam(value = "code") String code,
+        @RequestParam(value = "state") String state
+    ) {
+        return wxServiceImpl.getWxUserInfo(code);
     }
 }
