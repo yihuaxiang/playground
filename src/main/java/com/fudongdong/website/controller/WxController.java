@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController()
 @RequestMapping("/wx")
-@CrossOrigin(origins = {"https://yidaoyilu.z.wiki"})
+@CrossOrigin(origins = {"https://yidaoyilu.z.wiki", "http://localhost:8080/"})
 @RequiredArgsConstructor
 public class WxController {
 
