@@ -26,4 +26,9 @@ public class WxController {
     public String test() {
         return this.wxServiceImpl.getAccessToken();
     }
+
+    @RequestMapping("/test1")
+    public String test1() {
+        return this.wxServiceImpl.getJsapiTicket();
+    }
 }
