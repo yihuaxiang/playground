@@ -29,11 +29,10 @@ public interface IWxService {
     /**
      * 获取微信 JS-SDK 签名
      * @param noncestr 随机字符串
-     * @param jsapi_ticket jsapi_ticket
      * @param timestamp 时间戳
      * @param url 签名所在的URL中
      *
      * @return 签名
      */
-    String getJsSDKSignature(String noncestr, String jsapi_ticket, Long timestamp, String url);
+    String getJsSDKSignature(String noncestr, Long timestamp, String url);
 }

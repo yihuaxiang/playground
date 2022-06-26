@@ -93,7 +93,8 @@ public class WxServiceImpl implements IWxService {
     }
 
     @Override
-    public String getJsSDKSignature(String noncestr, String jsapi_ticket, Long timestamp, String url) {
+    public String getJsSDKSignature(String noncestr, Long timestamp, String url) {
+        String jsapi_ticket = getJsapiTicket();
         TreeMap<String, String> map = new TreeMap<>();
         map.put("noncestr", noncestr);
         map.put("jsapi_ticket", jsapi_ticket);
