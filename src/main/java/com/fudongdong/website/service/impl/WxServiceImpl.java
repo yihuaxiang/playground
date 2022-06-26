@@ -56,7 +56,7 @@ public class WxServiceImpl implements IWxService {
                 log.info("save accessToken to cache");
                 // 缓存 access_token
                 Long expireSeconds = res.getExpires_in();
-                cache.put(accessTokenCacheKey, res.getAccess_token(), expireSeconds);
+                cache.put(accessTokenCacheKey, res.getAccess_token(), expireSeconds * 1000);
                 return res.getAccess_token();
             } else {
                 log.error("failed to get accessToken ,response is {}", content);
@@ -82,7 +82,7 @@ public class WxServiceImpl implements IWxService {
             if (res.isSuccess()) {
                 log.info("save jsapi ticket to cache");
                 Long expireSeconds = res.getExpires_in();
-                cache.put(jsapiTicketKey, res.getTicket(), expireSeconds);
+                cache.put(jsapiTicketKey, res.getTicket(), expireSeconds * 1000);
                 return res.getTicket();
             } else {
                 log.error("failed to get jsapi ticket, response is {}", content);
