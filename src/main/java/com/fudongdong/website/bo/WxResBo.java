@@ -2,10 +2,13 @@ package com.fudongdong.website.bo;
 
 import java.util.Objects;
 
+import lombok.Data;
+
 /**
  * @author dongdong.fdd
  * @date 2022/6/25 22:27
  */
+@Data
 public class WxResBo {
     /**
      * 错误码
@@ -29,6 +32,6 @@ public class WxResBo {
     private String errmsg;
 
     public boolean isSuccess() {
-        return Objects.equals(Long.valueOf("0"), this.errcode);
+        return Objects.isNull(this.errcode) || Objects.equals(Long.valueOf("0"), this.errcode);
     }
 }
