@@ -74,6 +74,7 @@ public class WxServiceImpl implements IWxService {
 
         if (StringUtils.isNotBlank(prevTicket)) {
             log.info("getJsapiTicket from cache");
+            return prevTicket;
         } else {
             String getTicketUrl = String.format(
                 "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi", this.getAccessToken());
